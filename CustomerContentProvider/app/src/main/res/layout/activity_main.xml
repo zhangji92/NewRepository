@@ -29,4 +29,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/upData_data"
         android:text="@string/delete" />
+    <Button
+        android:id="@+id/select_one_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detele_data"
+        android:text="@string/one" />
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_below="@id/select_one_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>
