@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragmentTransaction.add(R.id.id_frame, firstPage, "first");
             } else {
                 fragmentTransaction.show(firstPage);
-                Log.e("====", "++++++++++++++");
             }
         } else if (v.getId() == linearLayout_play.getId()) {
             imageView_play.setImageResource(R.mipmap.love_y);
@@ -136,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragmentTransaction.add(R.id.id_frame, lovePlay, "play");
             } else {
                 fragmentTransaction.show(lovePlay);
-                Log.e("====", "=======");
             }
         } else if (v.getId() == linearLayout_preferential.getId()) {
             imageView_preferential.setImageResource(R.mipmap.preferential_y);
