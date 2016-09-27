@@ -80,7 +80,7 @@ public class LovePlay extends BaseFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.love_play, container, false);
         //网络传输数据
-        httpTools.getFirstDate(mHandler, String.valueOf(lat), String.valueOf(lng), null, null, null, null, 2);
+        httpTools.getDate(mHandler, String.valueOf(lat), String.valueOf(lng), null, null, null, null, 2);
         //适配器
         lovePlayAdapter = new LovePlayAdapter(getActivity(), modeList);
         //控件

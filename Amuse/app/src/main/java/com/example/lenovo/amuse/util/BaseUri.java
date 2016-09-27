@@ -13,6 +13,7 @@ public class BaseUri {
     //首页
     public final static String HOME=BASE+"service/index.php?model=home&action=home_new";
     public final static String LOVE_PLAY=BASE+"/service/index.php?model=city&action=indexcity";
+    public final static String PREFERENTIAL=BASE+"/service/index.php?model=favorable&action=favorableshoplist";
 
     //code标识符
     public final static int FIRSTCODE=1;
@@ -21,5 +22,6 @@ public class BaseUri {
     //定位
     public final static int LOCATION=3;
     public final static int LOVE_PLAY_CODE=4;
+    public final static int PRE=5;
 
 }

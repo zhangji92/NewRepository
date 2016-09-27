@@ -153,7 +153,7 @@ public class FirstPage extends BaseFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.first_page, container, false);
         //网络连接
-        httpTools.getFirstDate(mHandler, String.valueOf(lat), String.valueOf(lng), null,null,null,null,1);
+        httpTools.getDate(mHandler, String.valueOf(lat), String.valueOf(lng), null,null,null,null,1);
         //list控件
         listView = (ListView) view.findViewById(R.id.id_first_list);
         textView_location = (TextView) view.findViewById(R.id.tool_location);

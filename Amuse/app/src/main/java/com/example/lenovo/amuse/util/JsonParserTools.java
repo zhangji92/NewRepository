@@ -2,6 +2,7 @@ package com.example.lenovo.amuse.util;
 
 import com.example.lenovo.amuse.mode.FirstPageMode;
 import com.example.lenovo.amuse.mode.LovePlayMode;
+import com.example.lenovo.amuse.mode.PreferentialMode;
 import com.google.gson.Gson;
 
 import java.util.Objects;
@@ -23,6 +24,8 @@ public class JsonParserTools {
                 obj = gson.fromJson(s, FirstPageMode.class);
             } else if (flags == 2) {
                 obj = gson.fromJson(s, LovePlayMode.class);
+            }else if (flags==3){
+                obj = gson.fromJson(s, PreferentialMode.class);
             }
         }
         return obj;

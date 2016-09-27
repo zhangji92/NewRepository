@@ -41,14 +41,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--//key:开发者申请的Key-->
+        <!-- //key:开发者申请的Key -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="RRly5oVB74LPLNE1c0kEBjPTBD8CLFAZ" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+
+        <activity android:name=".activity.LoginActivity"></activity>
     </application>
 
 </manifest>
