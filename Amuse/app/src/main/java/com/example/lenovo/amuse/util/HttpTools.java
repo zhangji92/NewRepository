@@ -35,12 +35,26 @@ public class HttpTools {
     }
 
     /**
+     * 首页数据
      * lat N string 维度
      * lng N string 经度
      * searcename N string 检索
+     *
+     * 同城爱玩
+     * pageNumber 是 string 页数
+     * pageSize   是 string 每页条数
+     * city       是 string 城市
+     * lat        是 string 维度
+     * lng        是 string 精度
+     * flags 标识符
      */
-    public void getFirstDate(final Handler handler, String lat, String lng, String searcename) {
-        String url = BaseUri.HOME + "&lat=" + lat + "&lng=" + lng;//"&searcename="+searcename
+    public void getFirstDate(final Handler handler, String lat, String lng, String searcename, String pageNumber, String pageSize, String city, final int flags) {
+        String url="";
+        if (flags==1){
+            url = BaseUri.HOME + "&lat=" + lat + "&lng=" + lng;//"&searcename="+searcename
+        }else if(flags==2){
+            url=BaseUri.LOVE_PLAY+"&lat="+lat+"&lng="+lng;//+"&pageNumber="+pageNumber+"&pageSize="+pageSize+"&city="+city
+        }
         finalHttp.get(url, new AjaxCallBack<String>() {
             @Override
             public void onStart() {
@@ -51,10 +65,17 @@ public class HttpTools {
             @Override
             public void onSuccess(String s) {
                 super.onSuccess(s);
-                Log.i("getFirstDate", "onSuccess:" + s);
+
                 Message message = new Message();
-                message.what=BaseUri.FIRSTCODE;
-                message.obj = JsonParserTools.getHengBean(s);
+                if (flags==1){
+                    message.what = BaseUri.FIRSTCODE;
+                    message.obj = JsonParserTools.parserMode(s,1);
+                }else if(flags==2){
+                    message.what=BaseUri.LOVE_PLAY_CODE;
+                    message.obj=JsonParserTools.parserMode(s,2);
+                    Log.i("getFirstDate", "onSuccess:"+flags + s);
+                }
+
                 handler.sendMessage(message);
             }
 

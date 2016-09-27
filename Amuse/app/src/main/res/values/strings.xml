@@ -5,6 +5,17 @@
 
 
     <string name="lovePlay">同城爱玩</string>
+    <string name="play_wine">酒水代理</string>
+    <string name="play_agent">仅代理商进入</string>
+    <string name="play_recruit">招聘专区</string>
+    <string name="play_JobWanted">招聘专区</string>
+    <string name="play_place">场所</string>
+    <string name="play_table">拼桌</string>
+    <string name="play_snapshot">快拍</string>
+    <string name="play_master">达人</string>
+    <string name="play_nearby">附近在玩</string>
+    <string name="play_bu">6bu6</string>
+
     <string name="preferential">优惠专区</string>
     <string name="who">我的</string>
 

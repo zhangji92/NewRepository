@@ -3,11 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text">
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="@color/first_text"
+            android:id="@+id/tool_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+    </android.support.v7.widget.Toolbar>
+
     <ListView
         android:id="@+id/id_first_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolBar" />
 
 
 </RelativeLayout>

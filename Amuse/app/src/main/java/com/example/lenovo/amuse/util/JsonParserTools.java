@@ -1,7 +1,10 @@
 package com.example.lenovo.amuse.util;
 
 import com.example.lenovo.amuse.mode.FirstPageMode;
+import com.example.lenovo.amuse.mode.LovePlayMode;
 import com.google.gson.Gson;
+
+import java.util.Objects;
 
 import static com.example.lenovo.amuse.mode.FirstPageMode.ResultCodeBean.RecommendBean.HengBean;
 
@@ -12,12 +15,18 @@ import static com.example.lenovo.amuse.mode.FirstPageMode.ResultCodeBean.Recomme
 
 public class JsonParserTools {
 
-    public static FirstPageMode getHengBean(String s) {
-        FirstPageMode firstPageMode = null;
+    public static Object parserMode(String s, int flags) {
+        Object obj = null;
+        Gson gson = new Gson();
         if (s != null) {
-            Gson gson = new Gson();
-            firstPageMode = gson.fromJson(s, FirstPageMode.class);
+            if (flags == 1) {
+                obj = gson.fromJson(s, FirstPageMode.class);
+            } else if (flags == 2) {
+                obj = gson.fromJson(s, LovePlayMode.class);
+            }
         }
-        return firstPageMode;
+        return obj;
     }
+
+
 }

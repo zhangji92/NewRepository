@@ -1,13 +1,14 @@
 package com.example.lenovo.amuse.mode;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by lenovo on 2016/9/26.
  * 首页实体类
  */
 
-public class FirstPageMode {
+public class FirstPageMode{
 
 
     /**
