@@ -1,5 +1,6 @@
 package com.example.lenovo.amuse.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -7,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.lenovo.amuse.R;
+import com.example.lenovo.amuse.activity.PlaceActivity;
+import com.example.lenovo.amuse.activity.SnapShortActivity;
 import com.example.lenovo.amuse.adapter.LovePlayAdapter;
 import com.example.lenovo.amuse.mode.LovePlayMode;
 import com.example.lenovo.amuse.util.BaseUri;
@@ -23,7 +27,7 @@ import java.util.List;
  * 同城爱玩
  */
 
-public class LovePlay extends BaseFragment {
+public class LovePlay extends BaseFragment implements View.OnClickListener {
     //添加数据集合
     private List<LovePlayMode.ResultCodeBean> modeList = new ArrayList<>();
     //实体类
@@ -32,6 +36,10 @@ public class LovePlay extends BaseFragment {
     ListView listView;
     //适配器
     private LovePlayAdapter lovePlayAdapter;
+    //快拍
+    LinearLayout linearLayout_snapShort;
+    LinearLayout linearLayout_place;
+
     //精度
     int lat = 1;
     //维度
@@ -42,7 +50,7 @@ public class LovePlay extends BaseFragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case BaseUri.LOVE_PLAY_CODE:
-                    mLovePlayMode = (LovePlayMode) msg.obj;
+                    mLovePlayMode = parseMode(msg.obj);
                     for (int i = 0; i < mLovePlayMode.getResultCode().size(); i++) {
                         modeList.addAll(mLovePlayMode.getResultCode());
                     }
@@ -59,13 +67,14 @@ public class LovePlay extends BaseFragment {
         }
     };
 
-//    private LovePlayMode parseMode(Object obj){
-//        LovePlayMode lovePlayMode=null;
-//        if (obj!=null&&obj instanceof lovePlayMode){
-//
-//        }
-//        return lovePlayMode;
-//    }
+    //解析数据
+    private LovePlayMode parseMode(Object obj) {
+        LovePlayMode lovePlayMode = null;
+        if (obj != null && obj instanceof LovePlayMode) {
+            lovePlayMode = (LovePlayMode) obj;
+        }
+        return lovePlayMode;
+    }
 
     /**
      * 每次创建（Fragment） 都会绘制Fragemnt 的View 组件时回调该方法
@@ -80,12 +89,18 @@ public class LovePlay extends BaseFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.love_play, container, false);
         //网络传输数据
-        httpTools.getDate(mHandler, String.valueOf(lat), String.valueOf(lng), null, null, null, null, 2);
+        httpTools.getDate(mHandler, String.valueOf(lat), String.valueOf(lng), null, null, null, null, null, 2);
         //适配器
         lovePlayAdapter = new LovePlayAdapter(getActivity(), modeList);
         //控件
         listView = (ListView) view.findViewById(R.id.play_list);
         listView.setAdapter(lovePlayAdapter);
+
+        //快拍
+        linearLayout_snapShort = (LinearLayout) view.findViewById(R.id.liner_snapShort);
+        linearLayout_snapShort.setOnClickListener(this);
+        linearLayout_place = (LinearLayout) view.findViewById(R.id.liner_place);
+        linearLayout_place.setOnClickListener(this);
 
         //scroll+listView设置一起滚动
         RelativeLayout zhiding = (RelativeLayout) view.findViewById(R.id.scroll_relative);
@@ -113,5 +128,20 @@ public class LovePlay extends BaseFragment {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = gd + (listView.getDividerHeight() * (adapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.liner_snapShort:
+                //跳转到快拍页面
+                startActivity(new Intent(getActivity(), SnapShortActivity.class));
+                break;
+            case R.id.liner_place:
+                //跳转到场所页面
+                startActivity(new Intent(getActivity(), PlaceActivity.class));
+                break;
+
+        }
     }
 }

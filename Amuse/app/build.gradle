@@ -34,4 +34,6 @@ dependencies {
     compile project(path: ':afnial')
     compile 'io.github.openfeign:feign-gson:9.3.1'
     compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.makeramen:roundedimageview:2.2.1'
+
 }

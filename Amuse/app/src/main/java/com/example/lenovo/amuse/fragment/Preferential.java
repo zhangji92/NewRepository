@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.example.lenovo.amuse.R;
 import com.example.lenovo.amuse.adapter.PreferentialAdapter;
+import com.example.lenovo.amuse.mode.LovePlayMode;
 import com.example.lenovo.amuse.mode.PreferentialMode;
 import com.example.lenovo.amuse.util.BaseUri;
 
@@ -24,7 +25,7 @@ import java.util.List;
 public class Preferential extends BaseFragment {
     private ListView listView;
     private PreferentialMode mPreferentialMode;
-    List<PreferentialMode.ResultCodeBean> list=new ArrayList<>();
+    List<PreferentialMode.ResultCodeBean> list = new ArrayList<>();
     private PreferentialAdapter preferentialAdapter;
 
     //精度
@@ -37,10 +38,10 @@ public class Preferential extends BaseFragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case BaseUri.PRE:
-                    mPreferentialMode = (PreferentialMode) msg.obj;
+                    mPreferentialMode = parseMode(msg.obj);
 //                    if (mPreferentialMode!=null&&mPreferentialMode.getResultCode()!=null){
-                        for (int i=0;i<mPreferentialMode.getResultCode().size();i++){
-                            list.addAll(mPreferentialMode.getResultCode());
+                    for (int i = 0; i < mPreferentialMode.getResultCode().size(); i++) {
+                        list.addAll(mPreferentialMode.getResultCode());
 //                        }
                     }
                     preferentialAdapter.notifyDataSetChanged();
@@ -54,6 +55,15 @@ public class Preferential extends BaseFragment {
             }
         }
     };
+
+    //解析数据
+    private PreferentialMode parseMode(Object obj) {
+        PreferentialMode preferentialMode = null;
+        if (obj != null && obj instanceof PreferentialMode) {
+            preferentialMode = (PreferentialMode) obj;
+        }
+        return preferentialMode;
+    }
 
     /**
      * 每次创建（Fragment） 都会绘制Fragemnt 的View 组件时回调该方法
@@ -69,7 +79,7 @@ public class Preferential extends BaseFragment {
         View view = inflater.inflate(R.layout.preferential, container, false);
         httpTools.postData(mHandler, "1", "1", null, null);
         ListView listView = (ListView) view.findViewById(R.id.pre_list);
-        preferentialAdapter=new PreferentialAdapter(list,getActivity());
+        preferentialAdapter = new PreferentialAdapter(list, getActivity());
         listView.setAdapter(preferentialAdapter);
         return view;
     }

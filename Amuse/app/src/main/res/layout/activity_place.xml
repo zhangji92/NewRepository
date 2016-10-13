@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_place"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/play_tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.81"
+            android:gravity="center_horizontal"
+            android:text="@string/play_place"
+            android:textColor="@color/first_text"
+            android:textSize="30sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/play_tool"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<Spinner-->
+            <!--android:id="@+id/spinner1"-->
+            <!--android:prompt="@string/all"-->
+            <!--android:entries="@arrays/all"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1" />-->
+
+        <!--<Spinner-->
+            <!--android:id="@+id/spinner2"-->
+            <!--android:prompt="@string/space"-->
+            <!--android:entries="@string/space"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1" />-->
+
+        <!--<Spinner-->
+            <!--android:id="@+id/spinner3"-->
+            <!--android:prompt="@string/evaluate"-->
+            <!--android:entries="@string/evaluate"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1" />-->
+
+        <!--<Spinner-->
+            <!--android:id="@+id/spinner4"-->
+            <!--android:prompt="@string/volume"-->
+            <!--android:entries="@string/volume"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1" />-->
+    <!--</LinearLayout>-->
+
+</RelativeLayout>

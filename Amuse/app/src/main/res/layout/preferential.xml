@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.94"
             android:gravity="center_horizontal"
-            android:text="@string/play_bu"
+            android:text="@string/preferential"
             android:textColor="@color/first_text"
             android:textSize="30sp" />
     </android.support.v7.widget.Toolbar>

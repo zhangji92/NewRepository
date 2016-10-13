@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="all">
+        <item>全部</item>
+        <item>KTV</item>
+        <item>酒吧</item>
+        <item>足疗</item>
+        <item>演艺吧</item>
+        <item>夜总会</item>
+        <item>SPA养生馆</item>
+        <item>商务会馆</item>
+    </string-array>
+    <string-array name="space">
+        <item>由近及远</item>
+        <item>由远及近</item>
+    </string-array>
+    <string-array name="evaluate">
+        <item>好评</item>
+        <item>中评</item>
+        <item>差评</item>
+    </string-array>
+    <string-array name="volume">
+        <item>销量高到低</item>
+        <item>销量低到高</item>
+    </string-array>
+</resources>
