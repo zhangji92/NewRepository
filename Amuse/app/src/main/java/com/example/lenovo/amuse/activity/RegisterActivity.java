@@ -16,6 +16,9 @@ import com.example.lenovo.amuse.mode.RegisterSuccess;
 import com.example.lenovo.amuse.mode.VerificationCode;
 import com.example.lenovo.amuse.util.BaseUri;
 
+/**
+ * 注册
+ */
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
     //手机号
     EditText editText_phone;

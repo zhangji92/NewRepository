@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.lenovo.amuse.mode.ResultCodeBean;
-import com.example.lenovo.amuse.mode.SuccessMode;
 
 import net.tsz.afinal.FinalDb;
 

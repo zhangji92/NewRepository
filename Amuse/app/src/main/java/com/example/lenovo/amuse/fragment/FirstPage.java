@@ -1,5 +1,6 @@
 package com.example.lenovo.amuse.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
 import com.example.lenovo.amuse.R;
+import com.example.lenovo.amuse.activity.PlaceDetails;
 import com.example.lenovo.amuse.adapter.FirstAdapter;
 import com.example.lenovo.amuse.adapter.ViewPageAdapter;
 import com.example.lenovo.amuse.mode.FirstPageMode;
@@ -50,7 +53,6 @@ public class FirstPage extends BaseFragment {
     private ViewPager viewPager;
     //适配器
     private ViewPageAdapter viewPageAdapter;
-
     //实例类
     FirstPageMode mFirstPageMode;
     //定位相关
@@ -70,7 +72,6 @@ public class FirstPage extends BaseFragment {
             switch (msg.what) {
                 case BaseUri.FIRSTCODE:
                     mFirstPageMode = getMode(msg.obj);
-
                     //遍历firstPageMode.getResultCode().getRecommend().getHeng().size()
                     for (int i = 0; i < mFirstPageMode.getResultCode().getRecommend().getHeng().size(); i++) {
                         //把数据添加到list中
@@ -89,7 +90,6 @@ public class FirstPage extends BaseFragment {
                             //把图片添加到视图集合中
                             viewList.add(imageView);
                         }
-
                         viewPageAdapter.setAdList(adBeanList);
                         viewPageAdapter.setViewList(viewList);
                         viewPager.setAdapter(viewPageAdapter);
@@ -111,7 +111,22 @@ public class FirstPage extends BaseFragment {
             }
         }
     };
-
+    /**
+     * 广告位 图片轮播
+     */
+    public void initCarousel() {
+        //当前的图片页数
+        int item = viewPager.getCurrentItem();
+        //当前页数等于最后一页时
+        if (item == viewPageAdapter.getAdList().size() - 1) {
+            //当前页数为0
+            viewPager.setCurrentItem(0);
+        } else {
+            //当前页数+1
+            viewPager.setCurrentItem(item + 1);
+        }
+        mHandler.sendEmptyMessageDelayed(BaseUri.FIRST_CODE_CAROUSE, 2000);
+    }
     //解析数据
     public FirstPageMode getMode(Object obj) {
         FirstPageMode mode = null;
@@ -148,46 +163,36 @@ public class FirstPage extends BaseFragment {
         httpTools.getDate(mHandler, String.valueOf(lat), String.valueOf(lng), null, null, null, null, null, 1);
         //list控件
         listView = (ListView) view.findViewById(R.id.id_first_list);
-        textView_location = (TextView) view.findViewById(R.id.tool_location);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position==0){
+                    getActivity().startActivity(new Intent(getActivity(), PlaceDetails.class));
+                }
+            }
+        });
 
+        textView_location = (TextView) view.findViewById(R.id.tool_location);
 
         //list适配器
         firstAdapter = new FirstAdapter(list, getActivity());
         listView.setAdapter(firstAdapter);
-
         //轮播控件
         viewPager = new ViewPager(getActivity());
+//        viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         //适配器实例化
         viewPageAdapter = new ViewPageAdapter(getActivity());
-
         //设定布局的宽度和高度
         AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, 260);
         //把布局的高度和宽度设置给viewPager
         viewPager.setLayoutParams(layoutParams);
-
         listView.addHeaderView(viewPager);
-
         return view;
     }
 
 
-    /**
-     * 广告位 图片轮播
-     */
-    public void initCarousel() {
 
-        //当前的图片页数
-        int item = viewPager.getCurrentItem();
-        //当前页数等于最后一页时
-        if (item == viewPageAdapter.getAdList().size() - 1) {
-            //当前页数为0
-            viewPager.setCurrentItem(0);
-        } else {
-            //当前页数+1
-            viewPager.setCurrentItem(item + 1);
-        }
-        mHandler.sendEmptyMessageDelayed(BaseUri.FIRST_CODE_CAROUSE, 2000);
-    }
+
 
     private void initLocation() {
         LocationClientOption option = new LocationClientOption();

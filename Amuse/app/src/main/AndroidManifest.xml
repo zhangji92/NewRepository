@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    //定位服务
+    <!--//定位服务-->
     <service
         android:name="com.baidu.location.f"
         android:enabled="true"
@@ -53,7 +53,11 @@
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.SnapShortActivity" />
         <activity android:name=".activity.UserMessage" />
-        <activity android:name=".activity.PlaceActivity"></activity>
+        <activity android:name=".activity.PlaceActivity"/>
+        <activity android:name=".activity.WineActivity" />
+        <activity android:name=".activity.WineBusiness" />
+        <activity android:name=".activity.WineAgentDetails" />
+        <activity android:name=".activity.PlaceDetails" />
     </application>
 
 </manifest>

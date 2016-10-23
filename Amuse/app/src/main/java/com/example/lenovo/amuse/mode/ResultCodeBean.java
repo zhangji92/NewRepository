@@ -2,6 +2,7 @@ package com.example.lenovo.amuse.mode;
 
 /**
  * Created by lenovo on 2016/9/28.
+ *
  */
 
 public class ResultCodeBean {

@@ -4,12 +4,43 @@
     <string name="logo">logo</string>
 
 
+    <string-array name="all">
+        <item>全部</item>
+        <item>KTV</item>
+        <item>酒吧</item>
+        <item>足疗</item>
+        <item>演艺吧</item>
+        <item>夜总会</item>
+        <item>SPA养生馆</item>
+        <item>商务会馆</item>
+    </string-array>
+    <string-array name="space">
+        <item>由近及远</item>
+        <item>由远及近</item>
+    </string-array>
+    <string-array name="evaluate">
+        <item>好评</item>
+        <item>中评</item>
+        <item>差评</item>
+    </string-array>
+    <string-array name="volume">
+        <item>销量高到低</item>
+        <item>销量低到高</item>
+    </string-array>
+
     <string name="lovePlay">同城爱玩</string>
     <string name="play_wine">酒水代理</string>
+    <string name="wine_synopsis">简介</string>
     <string name="play_agent">仅代理商进入</string>
     <string name="play_recruit">招聘专区</string>
     <string name="play_JobWanted">招聘专区</string>
     <string name="play_place">场所</string>
+    <string name="place_brief">商家简介</string>
+    <string name="place_project">服务项目</string>
+    <string name="place_customer">顾客评价</string>
+
+
+
     <string name="play_table">拼桌</string>
     <string name="play_snapshot">快拍</string>
     <string name="play_master">达人</string>
@@ -28,28 +59,6 @@
     <string name="evaluate">评价</string>
     <string name="volume">销量</string>
 
-    <!--<string-array name="all">-->
-        <!--<item>全部</item>-->
-        <!--<item>KTV</item>-->
-        <!--<item>酒吧</item>-->
-        <!--<item>足疗</item>-->
-        <!--<item>演艺吧</item>-->
-        <!--<item>夜总会</item>-->
-        <!--<item>SPA养生馆</item>-->
-        <!--<item>商务会馆</item>-->
-    <!--</string-array>-->
-    <!--<string-array name="space">-->
-        <!--<item>由近及远</item>-->
-        <!--<item>由远及近</item>-->
-    <!--</string-array>-->
-    <!--<string-array name="evaluate">-->
-        <!--<item>好评</item>-->
-        <!--<item>中评</item>-->
-        <!--<item>差评</item>-->
-    <!--</string-array>-->
-    <!--<string-array name="volume">-->
-        <!--<item>销量高到低</item>-->
-        <!--<item>销量低到高</item>-->
-    <!--</string-array>-->
+
 
 </resources>

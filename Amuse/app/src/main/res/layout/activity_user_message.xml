@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_user_message"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_user_message"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -51,6 +51,7 @@
         android:orientation="vertical">
         <!--头像-->
         <LinearLayout
+            android:id="@+id/userImg_liner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -60,25 +61,25 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2.5"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
+                android:layout_weight="2.5"
                 android:text="头像:"
                 android:textSize="17sp" />
 
             <!--用户头像-->
             <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/userImg"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
                 app:riv_oval="true" />
             <!--<ImageView-->
-                <!--android:id="@+id/userImg"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:scaleType="fitEnd" />-->
+            <!--android:id="@+id/userImg"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:scaleType="fitEnd" />-->
 
         </LinearLayout>
 
@@ -149,17 +150,17 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="2.5"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_weight="2.5"
                 android:text="性别:"
                 android:textSize="17sp" />
 
             <!--性别-->
             <RadioGroup
-                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <RadioButton

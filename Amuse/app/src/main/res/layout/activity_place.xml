@@ -21,43 +21,48 @@
             android:textSize="30sp" />
     </android.support.v7.widget.Toolbar>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/play_tool"-->
-        <!--android:orientation="horizontal">-->
+    <LinearLayout
+        android:id="@+id/place_liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/play_tool"
+        android:orientation="horizontal">
 
-        <!--<Spinner-->
-            <!--android:id="@+id/spinner1"-->
-            <!--android:prompt="@string/all"-->
-            <!--android:entries="@arrays/all"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1" />-->
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="0dp"
 
-        <!--<Spinner-->
-            <!--android:id="@+id/spinner2"-->
-            <!--android:prompt="@string/space"-->
-            <!--android:entries="@string/space"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1" />-->
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/all" />
 
-        <!--<Spinner-->
-            <!--android:id="@+id/spinner3"-->
-            <!--android:prompt="@string/evaluate"-->
-            <!--android:entries="@string/evaluate"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1" />-->
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/space" />
 
-        <!--<Spinner-->
-            <!--android:id="@+id/spinner4"-->
-            <!--android:prompt="@string/volume"-->
-            <!--android:entries="@string/volume"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1" />-->
-    <!--</LinearLayout>-->
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/evaluate" />
+
+        <Spinner
+            android:id="@+id/spinner4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/volume" />
+    </LinearLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/place_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/place_liner" />
+
 
 </RelativeLayout>

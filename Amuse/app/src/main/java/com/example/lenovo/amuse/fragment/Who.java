@@ -1,12 +1,7 @@
 package com.example.lenovo.amuse.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +11,12 @@ import com.example.lenovo.amuse.MyApplication;
 import com.example.lenovo.amuse.R;
 import com.example.lenovo.amuse.activity.LoginActivity;
 import com.example.lenovo.amuse.activity.UserMessage;
-import com.example.lenovo.amuse.mode.SuccessMode;
+import com.example.lenovo.amuse.mode.ResultCodeBean;
 import com.example.lenovo.amuse.util.BaseUri;
+import com.example.lenovo.amuse.util.MyFinalDB;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import net.tsz.afinal.FinalBitmap;
-import net.tsz.afinal.FinalDb;
 
 /**
  * Created by lenovo on 2016/9/22.
@@ -57,6 +52,7 @@ public class Who extends BaseFragment implements View.OnClickListener {
         textView_login.setOnClickListener(this);
         //获取实例
         myApplication = (MyApplication) getActivity().getApplication();
+
         //关注
         textView_follow = (TextView) view.findViewById(R.id.who_follow);
         //粉丝
@@ -73,12 +69,19 @@ public class Who extends BaseFragment implements View.OnClickListener {
             textView_login.setText(myApplication.getSuccessMode().getResultCode().getNickname());
             textView_follow.setText("关注：" + myApplication.getSuccessMode().getResultCode().getAttention_count() + " | ");
             textView_fans.setText("粉丝：" + myApplication.getSuccessMode().getResultCode().getFans_count());
-            FinalBitmap finalBitmap=FinalBitmap.create(getActivity());
-            finalBitmap.display(roundedImageView,BaseUri.BASE+myApplication.getSuccessMode().getResultCode().getImgUrl());
+            FinalBitmap finalBitmap = FinalBitmap.create(getActivity());
+            String img=myApplication.getSuccessMode().getResultCode().getImgUrl();
+            finalBitmap.display(roundedImageView, BaseUri.BASE + img);
+
+        }else if (myApplication.isFlag()){
+            textView_login.setText("登录/注册");
+            textView_follow.setText("");
+            textView_fans.setText("");
+            roundedImageView.setImageResource(R.drawable.www);
+            myApplication.setFlag(false);
+
         }
     }
-
-
     @Override
     public void onClick(View v) {
         String login = textView_login.getText().toString();
@@ -87,11 +90,9 @@ public class Who extends BaseFragment implements View.OnClickListener {
                 if (login.contains("登录/注册")) {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 } else {
-
                     startActivity(new Intent(getActivity(), UserMessage.class));
                 }
                 break;
         }
     }
-
 }

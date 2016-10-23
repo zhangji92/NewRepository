@@ -4,10 +4,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.example.lenovo.amuse.mode.LovePlayMode;
+import com.example.lenovo.amuse.mode.WineMode;
+import com.google.gson.Gson;
+
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
 import net.tsz.afinal.http.AjaxParams;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,7 +82,6 @@ public class HttpTools {
             @Override
             public void onStart() {
                 super.onStart();
-                Log.i("getFirstDate", "onStart");
             }
 
             @Override
@@ -96,16 +101,13 @@ public class HttpTools {
                 } else if (flags == 4) {//快拍列表
                     message.what = BaseUri.SNAP;
                     message.obj = JsonParserTools.parserMode(s, 7);
-                    Log.i("getFirstDate", "onSuccess:" + flags + s);
                 }
-
                 handler.sendMessage(message);
             }
 
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
-                Log.i("getFirstDate", "onFailure:" + strMsg);
             }
         });
     }
@@ -126,7 +128,6 @@ public class HttpTools {
             @Override
             public void onStart() {
                 super.onStart();
-                Log.i("getFirstDate", "onStart:");
             }
 
             @Override
@@ -136,13 +137,11 @@ public class HttpTools {
                 message.obj = JsonParserTools.parserMode(s, 3);
                 message.what = BaseUri.PRE;
                 handler.sendMessage(message);
-                Log.i("getFirstDate", "onSuccess:" + s);
             }
 
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
-                Log.i("getFirstDate", "onFailure:" + strMsg);
             }
         });
     }
@@ -161,12 +160,12 @@ public class HttpTools {
         String url = "";
         final Map<String, String> map = new HashMap<>();
         if (flags == 1) {//注册
-            url = BaseUri.REGISTER + "&username=" + username + "&passwd=" + passwd + "&code=" + code;
+            url = BaseUri.REGISTER;
             map.put("username", username);
             map.put("passwd", passwd);
             map.put("code", code);
         } else if (flags == 2) {//登陆
-            url = BaseUri.LOGIN + "&username=" + username + "&passwd=" + passwd;
+            url = BaseUri.LOGIN;
             map.put("username", username);
             map.put("passwd", passwd);
         }
@@ -174,7 +173,6 @@ public class HttpTools {
             @Override
             public void onStart() {
                 super.onStart();
-                Log.i("getFirstDate", "onStart:");
             }
 
             @Override
@@ -186,27 +184,177 @@ public class HttpTools {
                     message.what = BaseUri.REGISTER_SUCCESS;
                 } else if (flags == 2) {
                     message.obj = s;
-                    Log.i("getFirstDate", "onSuccess:" + s);
                     message.what = BaseUri.LOGIN_SUCCESS;
+
                 }
                 handler.sendMessage(message);
+            }
+
+            @Override
+            public void onFailure(Throwable t, int errorNo, String strMsg) {
+                super.onFailure(t, errorNo, strMsg);
+            }
+        });
+    }
+    /**
+     * token 是string 用户token
+     nickname 是 string 昵称
+     gender 否 string 性别 1男 2女
+     age 否 string 年龄
+     address 否 string 地址
+     pics 否 string 头像地址
+     */
+    /**
+     * pageNumber 是 string 页码
+     * pageSize 是 string 条数
+     */
+    public void postMessage(final Handler mHandler, String token, String nickname, String gender, String age, String address, String pics) {
+
+        String uri = BaseUri.USER;
+        AjaxParams ajaxParams = new AjaxParams();
+        ajaxParams.put("token", token);
+        ajaxParams.put("nickname", nickname);
+        ajaxParams.put("gender", gender);
+        ajaxParams.put("age", age);
+        ajaxParams.put("address", address);
+        ajaxParams.put("pics", pics);
+
+        finalHttp.post(uri, ajaxParams, new AjaxCallBack<String>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                super.onSuccess(s);
+                Message message = new Message();
+                message.obj = JsonParserTools.parserMode(s, 4);
+                message.what = BaseUri.MESSAGE_CODE;
+                mHandler.sendMessage(message);
+            }
+
+            @Override
+            public void onFailure(Throwable t, int errorNo, String strMsg) {
+                super.onFailure(t, errorNo, strMsg);
+            }
+        });
+    }
+
+
+    /**
+     * pageNumber 是 string 页码
+     * pageSize 是 string 条数
+     * <p>
+     * 图片
+     * pics 是 string 页码
+     */
+    public void postWine(final Handler mHandler, String pageNumber, String pageSize, File pics, final int flags) {
+        String uri = "";
+        AjaxParams ajaxParams = new AjaxParams();
+        if (flags == 1) {
+            uri = BaseUri.WINE;
+            ajaxParams.put("pageNumber", pageNumber);
+            ajaxParams.put("pageSize", pageSize);
+        } else if (flags == 2) {
+            uri = BaseUri.PIC;
+            try {
+                ajaxParams.put("pics", pics);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        finalHttp.post(uri, ajaxParams, new AjaxCallBack<String>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                super.onSuccess(s);
+                Message message = new Message();
+                if (flags == 1) {
+                    message.obj = JsonParserTools.parserMode(s, 8);
+                    message.what = BaseUri.WINE_CODE;
+                } else if (flags == 2) {
+                    message.obj = JsonParserTools.parserMode(s, 4);
+                    message.what = BaseUri.PIC_CODE;
+                }
+                mHandler.sendMessage(message);
 
             }
 
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
-                Log.i("getFirstDate", "onFailure:" + strMsg);
             }
         });
     }
-    /**
-     * token是string用户token
-     nickname是string昵称
-     gender否string性别 1男 2女
-     age否string年龄
-     address否string地址
-     pics否string头像地址
-     */
 
+    /**
+     * pageNumber 是 string 页数
+     * pageSize   是 string 每页条数
+     * city       是 string 城市
+     * lat        是 string 维度
+     * lng        是 string 精度
+     * flags 标识符
+     * <p>
+     * `酒水代理商家信息
+     * pageNumber 是 string 页码
+     * pageSize 是 string 条数
+     * id 否 string 代理商id
+     * <p>
+     * `酒水代理商家详情信息
+     * pageNumber 是 string 页码
+     * pageSize 是 string 条数
+     * id 否 string 代理商品id
+     */
+    public void getPlace(final Handler handler, String pageNumber, String lat, String lng, final String flag, String pageSize, String city, String id, final int flags) {
+        String url = "";
+        if (flags == 1) {
+            //场所
+            url = BaseUri.LOVE_PLAY + "&lat=" + lat + "&lng=" + lng;//+"&pageNumber="+pageNumber+"&pageSize="+pageSize+"&city="+city
+        } else if (flags == 2) {
+            url = BaseUri.WINE_AGENT + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&id=" + id;
+        } else if (flags == 3) {
+            url = BaseUri.WINE_DETAILS + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&id=" + id;
+        } else if (flags == 4) {
+            url = BaseUri.SHOP_DETAILS + "&id=" + id;
+        }
+
+        finalHttp.get(url, new AjaxCallBack<String>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                super.onSuccess(s);
+                Message message = new Message();
+                if (flags == 1) {
+                    message.obj = JsonParserTools.parserMode(s, 2);
+                    message.what = BaseUri.PLACE_CODE;
+                } else if (flags == 2) {
+                    message.what = BaseUri.WINE_AGENT_CODE;
+                    message.obj = JsonParserTools.parserMode(s, 9);
+                } else if (flags == 3) {
+                    message.what = BaseUri.WINE_AGENT_DETAILS;
+                    message.obj = JsonParserTools.parserMode(s, 10);
+                } else if (flags == 4) {
+                    message.what = BaseUri.SHOP_DETAILS_CODE;
+                    message.obj = JsonParserTools.parserMode(s, 11);
+                    Log.i("getFirstDate", "onStart" + s);
+                }
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onFailure(Throwable t, int errorNo, String strMsg) {
+                super.onFailure(t, errorNo, strMsg);
+                Log.i("getFirstDate", "onFailure" + strMsg);
+            }
+        });
+    }
 }

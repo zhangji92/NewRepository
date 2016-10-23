@@ -22,11 +22,17 @@ import com.example.lenovo.amuse.util.MyFinalDB;
 
 import net.tsz.afinal.FinalDb;
 
+/**
+ * 登陆
+ */
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     //账号
     private EditText editText_user;
     private EditText editText_pad;
     MyApplication myApplication;
+
+    String user;
+    String pad;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -38,6 +44,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         SuccessMode successMode = (SuccessMode) JsonParserTools.parserMode(str, 6);
                         if (successMode.getMessage().contains("成功")) {
                             Toast.makeText(LoginActivity.this, "登陆" + successMode.getMessage(), Toast.LENGTH_LONG).show();
+                            myApplication.setUser(user);
+                            myApplication.setPad(pad);
                             //把数据保存到数据库
                             ResultCodeBean bean=successMode.getResultCode();
 //                          bean.setId("1");
@@ -84,8 +92,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.login:
                 //数据源清空
                 myApplication.setSuccessMode(null);
-                String user = editText_user.getText().toString();
-                String pad = editText_pad.getText().toString();
+                user = editText_user.getText().toString();
+                pad = editText_pad.getText().toString();
                 if (user.equals("")) {
                     Toast.makeText(LoginActivity.this, "账号不能为空", Toast.LENGTH_LONG).show();
                 } else if (pad.equals("")) {

@@ -15,6 +15,9 @@ import com.example.lenovo.amuse.util.BaseUri;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 快拍
+ */
 public class SnapShortActivity extends BaseActivity {
 
     private SnapShortAdapter snapShortAdapter;
