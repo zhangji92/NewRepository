@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">所有项目</string>
     <string name="weChat">微信</string>
+    <string name="sqLite">SQLite数据库</string>
+
     <string name="action_search">查找</string>
     <string name="action_add">添加</string>
     <string name="menu_group_chat">发起群聊</string>

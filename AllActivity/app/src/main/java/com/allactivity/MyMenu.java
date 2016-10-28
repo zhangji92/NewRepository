@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.allactivity.sqlite.SQLiteDome;
+import com.allactivity.weChat.WeChatActivity;
+
 /**
  * Created by lenovo on 2016/10/22.
  * 菜单
@@ -29,6 +32,9 @@ public class MyMenu extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.weChat:
                 startActivity(new Intent(this, WeChatActivity.class));
+                break;
+            case R.id.sqLite:
+                startActivity(new Intent(this, SQLiteDome.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
