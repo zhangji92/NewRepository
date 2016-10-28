@@ -22,6 +22,17 @@ public class MyApplication extends Application {
     private String agentId;
     //商品id
     private String goodsId;
+
+    private String shopId;
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
     public String getGoodsId() {
         return goodsId;
     }

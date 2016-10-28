@@ -185,7 +185,6 @@ public class HttpTools {
                 } else if (flags == 2) {
                     message.obj = s;
                     message.what = BaseUri.LOGIN_SUCCESS;
-
                 }
                 handler.sendMessage(message);
             }
@@ -284,7 +283,6 @@ public class HttpTools {
                 mHandler.sendMessage(message);
 
             }
-
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
@@ -292,7 +290,9 @@ public class HttpTools {
         });
     }
 
+
     /**
+     *
      * pageNumber 是 string 页数
      * pageSize   是 string 每页条数
      * city       是 string 城市
@@ -314,7 +314,7 @@ public class HttpTools {
         String url = "";
         if (flags == 1) {
             //场所
-            url = BaseUri.LOVE_PLAY + "&lat=" + lat + "&lng=" + lng;//+"&pageNumber="+pageNumber+"&pageSize="+pageSize+"&city="+city
+            url = BaseUri.PLACE + "&lat=" + lat + "&lng=" + lng;//+"&pageNumber="+pageNumber+"&pageSize="+pageSize+"&city="+city
         } else if (flags == 2) {
             url = BaseUri.WINE_AGENT + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize + "&id=" + id;
         } else if (flags == 3) {
@@ -334,8 +334,9 @@ public class HttpTools {
                 super.onSuccess(s);
                 Message message = new Message();
                 if (flags == 1) {
-                    message.obj = JsonParserTools.parserMode(s, 2);
+                    message.obj = JsonParserTools.parserMode(s,14);
                     message.what = BaseUri.PLACE_CODE;
+                    Log.i("getFirstDate", "----BaseUri.PLACE-------: " + s);
                 } else if (flags == 2) {
                     message.what = BaseUri.WINE_AGENT_CODE;
                     message.obj = JsonParserTools.parserMode(s, 9);
@@ -345,7 +346,6 @@ public class HttpTools {
                 } else if (flags == 4) {
                     message.what = BaseUri.SHOP_DETAILS_CODE;
                     message.obj = JsonParserTools.parserMode(s, 11);
-                    Log.i("getFirstDate", "onStart" + s);
                 }
                 handler.sendMessage(message);
             }
@@ -353,8 +353,54 @@ public class HttpTools {
             @Override
             public void onFailure(Throwable t, int errorNo, String strMsg) {
                 super.onFailure(t, errorNo, strMsg);
-                Log.i("getFirstDate", "onFailure" + strMsg);
             }
         });
     }
+
+    public <T> void getServiceMessage(final Handler handler, final ServiceMessage<T> msg) {
+
+        finalHttp.get(msg.getUrl(), new AjaxCallBack<String>() {
+            @Override
+            public void onLoading(long count, long current) {
+                super.onLoading(count, current);
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                super.onSuccess(s);
+                Log.i("getFirstDate", "----getServiceMessage-------: " + s);
+                Gson gson = new Gson();
+                T t = (T) gson.fromJson(s, msg.getT().getClass());
+                Message message = new Message();
+                message.what = msg.getWhat();
+                message.obj = t;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+    public <T> void postServiceMessage(final Handler handler, final ServiceMessage<T> msg, AjaxParams params) {
+        finalHttp.post(msg.getUrl(), params, new AjaxCallBack<String>() {
+            @Override
+            public void onLoading(long count, long current) {
+                super.onLoading(count, current);
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                super.onSuccess(s);
+                Log.e("", "----getLogin-------: " + s);
+                Gson gson = new Gson();
+                T t = (T) gson.fromJson(s, msg.getT().getClass());
+
+                Message message = new Message();
+                message.what = msg.getWhat();
+                message.obj = t;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+
+
 }

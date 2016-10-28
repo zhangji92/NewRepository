@@ -12,24 +12,27 @@ import android.widget.Toast;
 import com.example.lenovo.amuse.R;
 import com.example.lenovo.amuse.adapter.PlaceAdapter;
 import com.example.lenovo.amuse.mode.LovePlayMode;
+import com.example.lenovo.amuse.mode.PlaceMode;
 import com.example.lenovo.amuse.util.BaseUri;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.handmark.pulltorefresh.library.SectionHeaderListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 场所
  */
-public class PlaceActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener2 {
+public class PlaceActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener2, AdapterView.OnItemClickListener {
 
-    private List<LovePlayMode.ResultCodeBean> list = new ArrayList<>();
+    private List<PlaceMode.ResultCodeBean> list = new ArrayList<>();
 
     private PullToRefreshListView pullToRefreshListView;
     private PlaceAdapter placeAdapter;
-    private LovePlayMode placeMode;
+    //    private LovePlayMode placeMode;
+    private PlaceMode placeMode;
+    String flag;
     //精度
     int lat = 1;
     //维度
@@ -42,7 +45,8 @@ public class PlaceActivity extends BaseActivity implements PullToRefreshBase.OnR
             switch (msg.what) {
                 case BaseUri.PLACE_CODE:
                     placeMode = parseMode(msg.obj);
-                    if (placeMode.getResultCode() != null) {
+
+                    if (placeMode != null) {
                         if (index == 0) {
                             for (int i = 0; i < placeMode.getResultCode().size(); i++) {
                                 list.add(placeMode.getResultCode().get(i));
@@ -64,10 +68,10 @@ public class PlaceActivity extends BaseActivity implements PullToRefreshBase.OnR
         }
     };
 
-    private LovePlayMode parseMode(Object obj) {
-        LovePlayMode placeMode = null;
-        if (obj != null && obj instanceof LovePlayMode) {
-            placeMode = (LovePlayMode) obj;
+    private PlaceMode parseMode(Object obj) {
+        PlaceMode placeMode = null;
+        if (obj != null && obj instanceof PlaceMode) {
+            placeMode = (PlaceMode) obj;
         }
         return placeMode;
     }
@@ -77,14 +81,17 @@ public class PlaceActivity extends BaseActivity implements PullToRefreshBase.OnR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place);
 
+        flag = getIntent().getStringExtra("Table");
+
         index = 0;
         //网络传输数据
         httpTools.getPlace(mHandler, String.valueOf(lat), String.valueOf(lng), String.valueOf(index), "10", null, null, null, 1);
-
         //适配器
-        placeAdapter = new PlaceAdapter(list, PlaceActivity.this);
+        placeAdapter = new PlaceAdapter(list, PlaceActivity.this, flag);
         //控件
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.place_list);
+        //点击监听事件
+        pullToRefreshListView.setOnItemClickListener(this);
         //刷新监听
         pullToRefreshListView.setOnRefreshListener(this);
         //适配器
@@ -131,6 +138,21 @@ public class PlaceActivity extends BaseActivity implements PullToRefreshBase.OnR
                     }
                 }
             });
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (flag != null && flag.equals("flag")) {
+            --position;
+            Intent intent = new Intent();
+            intent.putExtra("mode", placeMode.getResultCode().get(position));
+            setResult(0, intent);
+            finish();
+        } else {
+            Intent intent = new Intent(this, PlaceDetails.class);
+            intent.putExtra("shopId", list.get(position).getId());
+            this.startActivity(intent);
         }
     }
 }

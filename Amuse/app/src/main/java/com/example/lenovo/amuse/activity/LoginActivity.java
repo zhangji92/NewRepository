@@ -52,6 +52,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             MyFinalDB.getInstance(LoginActivity.this).saveFinalDB(bean);
                             //添加数据
                             myApplication.setSuccessMode(successMode);
+                            //登陆成功的标志符
+                            myApplication.setFlag(true);
                             finish();
                         }
                     } else if (str.contains("错误")) {

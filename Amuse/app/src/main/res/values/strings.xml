@@ -42,7 +42,16 @@
 
 
     <string name="play_table">拼桌</string>
+    <string name="play_cancel">取消</string>
+    <string name="play_release">发布</string>
+    <string name="play_name">请在此输入群聊名称</string>
+    <string name="play_juvenile">少年，还在等什么，一起来嗨</string>
+    <string name="play_prompt">建议写明事件地点，这样更容易拼桌成功</string>
+
+    <string name="play_join">立即加入</string>
     <string name="play_snapshot">快拍</string>
+    <string name="snapShort_follow">关注</string>
+    <string name="snapShort_comment">评论</string>
     <string name="play_master">达人</string>
     <string name="play_nearby">附近在玩</string>
     <string name="play_bu">6bu6</string>

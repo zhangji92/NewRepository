@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -14,13 +13,14 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.lenovo.amuse.MyApplication;
 import com.example.lenovo.amuse.R;
+import com.example.lenovo.amuse.activity.LoginActivity;
 import com.example.lenovo.amuse.activity.PlaceActivity;
 import com.example.lenovo.amuse.activity.PlaceDetails;
 import com.example.lenovo.amuse.activity.SnapShortActivity;
+import com.example.lenovo.amuse.activity.TableListActivity;
 import com.example.lenovo.amuse.activity.WineActivity;
 import com.example.lenovo.amuse.adapter.LovePlayAdapter;
 import com.example.lenovo.amuse.mode.LovePlayMode;
@@ -46,6 +46,8 @@ public class LovePlay extends BaseFragment implements View.OnClickListener {
     //快拍
     LinearLayout linearLayout_snapShort;
     LinearLayout linearLayout_place;
+    //拼桌
+    private LinearLayout linearLayout_share;
 
     //精度
     int lat = 1;
@@ -106,16 +108,17 @@ public class LovePlay extends BaseFragment implements View.OnClickListener {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity(),PlaceDetails.class);
-                String shopId=mLovePlayMode.getResultCode().get(position).getId();
-                Log.i("getFirstDate", "Fragment" + shopId);
-                intent.putExtra("shopId",shopId);
+                Intent intent = new Intent(getActivity(), PlaceDetails.class);
+                String shopId = mLovePlayMode.getResultCode().get(position).getId();
+                //设置ID
+                //((MyApplication)getActivity().getApplication()).setShopId(mLovePlayMode.getResultCode().get(position).getId());
+                intent.putExtra("shopId", shopId);
                 getActivity().startActivity(intent);
             }
         });
         listView.setAdapter(lovePlayAdapter);
         //酒水代理
-        RelativeLayout r1= (RelativeLayout) view.findViewById(R.id.r1);
+        RelativeLayout r1 = (RelativeLayout) view.findViewById(R.id.r1);
         r1.setOnClickListener(this);
 
         //快拍
@@ -123,6 +126,11 @@ public class LovePlay extends BaseFragment implements View.OnClickListener {
         linearLayout_snapShort.setOnClickListener(this);
         linearLayout_place = (LinearLayout) view.findViewById(R.id.liner_place);
         linearLayout_place.setOnClickListener(this);
+        //拼桌
+        linearLayout_share = (LinearLayout) view.findViewById(R.id.liner_share);
+        linearLayout_share.setOnClickListener(this);
+        //达人馆
+
 
         //scroll+listView设置一起滚动
         RelativeLayout zhiding = (RelativeLayout) view.findViewById(R.id.scroll_relative);
@@ -167,6 +175,18 @@ public class LovePlay extends BaseFragment implements View.OnClickListener {
             case R.id.r1:
                 //跳转到酒水代理页面
                 startActivity(new Intent(getActivity(), WineActivity.class));
+                break;
+            case R.id.liner_share:
+
+                boolean flag = ((MyApplication) getActivity().getApplication()).isFlag();
+                if (!flag) {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    //跳转到拼桌页面
+                    startActivity(new Intent(getActivity(), TableListActivity.class));
+                }
+
                 break;
         }
     }

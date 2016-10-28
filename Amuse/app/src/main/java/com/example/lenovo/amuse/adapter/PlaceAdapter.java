@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import com.example.lenovo.amuse.R;
 import com.example.lenovo.amuse.activity.PlaceDetails;
+import com.example.lenovo.amuse.activity.TableAddActivity;
 import com.example.lenovo.amuse.mode.LovePlayMode;
+import com.example.lenovo.amuse.mode.PlaceMode;
 import com.example.lenovo.amuse.util.BaseUri;
 
 import net.tsz.afinal.FinalBitmap;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -26,13 +29,15 @@ import java.util.List;
 
 public class PlaceAdapter extends BaseAdapter {
 
-    private List<LovePlayMode.ResultCodeBean> list;
+    private List<PlaceMode.ResultCodeBean> list;
     private Context context;
     private LayoutInflater layoutInflater;
+    private String strFlag;
 
-    public PlaceAdapter(List<LovePlayMode.ResultCodeBean> list, Context context) {
+    public PlaceAdapter(List<PlaceMode.ResultCodeBean> list, Context context, String flag) {
         this.list = list;
         this.context = context;
+        this.strFlag = flag;
     }
 
     @Override
@@ -51,15 +56,9 @@ public class PlaceAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, final View convertView, ViewGroup parent) {
-        View view=layoutInflater.from(context).inflate(R.layout.love,null);
-        RelativeLayout relativeLayout= (RelativeLayout) view.findViewById(R.id.place_relative);
-        relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context,PlaceDetails.class));
-            }
-        });
+    public View getView(final int position, final View convertView, ViewGroup parent) {
+        View view = layoutInflater.from(context).inflate(R.layout.love, null);
+
         //主题
         TextView textView_title = (TextView) view.findViewById(R.id.love_title);
         textView_title.setText(list.get(position).getShopname());

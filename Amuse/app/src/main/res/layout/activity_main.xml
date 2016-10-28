@@ -9,7 +9,7 @@
         android:id="@+id/id_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7" />
+        android:layout_weight="9" />
 
     <LinearLayout
         android:id="@+id/id_linerAll"
@@ -34,6 +34,7 @@
                 android:src="@mipmap/first_w" />
 
             <TextView
+                android:layout_marginTop="8dp"
                 android:id="@+id/first_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
                 android:src="@mipmap/love_w" />
 
             <TextView
+                android:layout_marginTop="8dp"
                 android:id="@+id/play_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,6 +80,7 @@
                 android:src="@mipmap/preferential_w" />
 
             <TextView
+                android:layout_marginTop="8dp"
                 android:id="@+id/preferential_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,6 +103,7 @@
                 android:src="@mipmap/who_w" />
 
             <TextView
+                android:layout_marginTop="8dp"
                 android:id="@+id/who_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

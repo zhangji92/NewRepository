@@ -1,11 +1,14 @@
 package com.example.lenovo.amuse.util;
 
 import com.example.lenovo.amuse.mode.AgentMode;
+import com.example.lenovo.amuse.mode.CommentSuccess;
 import com.example.lenovo.amuse.mode.FirstPageMode;
 import com.example.lenovo.amuse.mode.LovePlayMode;
+import com.example.lenovo.amuse.mode.PlaceMode;
 import com.example.lenovo.amuse.mode.PreferentialMode;
 import com.example.lenovo.amuse.mode.RegisterSuccess;
 import com.example.lenovo.amuse.mode.ShopMode;
+import com.example.lenovo.amuse.mode.SnapShortDetailsMode;
 import com.example.lenovo.amuse.mode.SnapShortMode;
 import com.example.lenovo.amuse.mode.SuccessMode;
 import com.example.lenovo.amuse.mode.VerificationCode;
@@ -46,6 +49,12 @@ public class JsonParserTools {
                 obj = gson.fromJson(s, WineDetails.class);
             }else if (flags==11){
                 obj = gson.fromJson(s, ShopMode.class);
+            }else if (flags==12){
+                obj = gson.fromJson(s, SnapShortDetailsMode.class);
+            }else if (flags==13){
+                obj = gson.fromJson(s, CommentSuccess.class);
+            }else if (flags==14){
+                obj = gson.fromJson(s, PlaceMode.class);
             }
         }
         return obj;

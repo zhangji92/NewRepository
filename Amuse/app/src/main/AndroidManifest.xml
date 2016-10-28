@@ -58,6 +58,9 @@
         <activity android:name=".activity.WineBusiness" />
         <activity android:name=".activity.WineAgentDetails" />
         <activity android:name=".activity.PlaceDetails" />
+        <activity android:name=".activity.SnapShortDetailsActivity" />
+        <activity android:name=".activity.TableListActivity" />
+        <activity android:name=".activity.TableAddActivity" />
     </application>
 
 </manifest>

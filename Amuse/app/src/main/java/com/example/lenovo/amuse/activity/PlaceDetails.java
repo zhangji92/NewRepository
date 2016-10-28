@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.lenovo.amuse.MyApplication;
 import com.example.lenovo.amuse.R;
 import com.example.lenovo.amuse.fragment.PlaceAssessFragment;
 import com.example.lenovo.amuse.fragment.PlaceDetailsContentFragment;
@@ -137,7 +138,7 @@ public class PlaceDetails extends FragmentActivity {
         //设置mViewPager的高度
         mViewPager.resetHeight(0);
 
-        Log.i("getFirstDate", "mViewPager.getHeight():" +  mViewPager.getHeight());
+
     }
 
     //解析数据
@@ -156,7 +157,7 @@ public class PlaceDetails extends FragmentActivity {
         setContentView(R.layout.place_details);
         //把当前的商家ID赋值给MyApplication
         String shopId=getIntent().getStringExtra("shopId");
-
+        //String shopId=((MyApplication)getApplication()).getShopId();
         //请求数据
         HttpTools.getInstance().getPlace(mHandler, null, null, null, null, null, null, shopId, 4);
         //标题栏
