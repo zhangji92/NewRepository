@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="loan_splash_background">#0044a4</color>
+    <color name="loan_color_white">#FFFFFF</color>
+    <!--预期年化收益率-->
+    <color name="loan_expected_annual_rate_no_color">#e3904c</color>
+    <color name="loan_expected_annual_rate_color">#e7e7e7</color>
+
+
+</resources>

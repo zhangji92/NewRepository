@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/loan_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/loan_finance_direct_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="A股上市企业存货质押融资项目" />
+
+        <ImageView
+            android:id="@+id/loan_finance_direct_novice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/loan_finance_direct_projectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:text="首次投资即送千元红包" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/loan_finance_direct_six"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6"
+                    android:textColor="@color/loan_expected_annual_rate_no_color"
+                    android:textSize="24sp" />
+
+
+                <TextView
+                    android:id="@+id/loan_finance_direct_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/percentage"
+                    android:drawableStart="@drawable/plus"
+                    android:text="4"
+                    android:textColor="@color/loan_expected_annual_rate_no_color"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="预期年化收益率"
+                android:textColor="@color/loan_expected_annual_rate_color"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/loan_finance_direct_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30天" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="期限"
+                android:textColor="@color/loan_expected_annual_rate_color"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/loan_finance_direct_thousand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="95.93万可投" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/finance_back"
+                android:text="立即投资"
+                android:textColor="@color/loan_color_white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/loan_expected_annual_rate_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="来自投资人的综合评分"
+                android:textColor="@color/loan_expected_annual_rate_color" />
+
+            <ImageView
+
+                android:id="@+id/loan_expected_star1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+
+                android:id="@+id/loan_expected_star2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/loan_expected_star3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/loan_expected_star4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/loan_expected_star5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已有"
+                android:textColor="@color/loan_expected_annual_rate_color" />
+
+            <TextView
+                android:id="@+id/loan_expected_no_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="49121"
+                android:textColor="@color/loan_expected_annual_rate_no_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人投资，"
+                android:textColor="@color/loan_expected_annual_rate_color" />
+
+            <TextView
+                android:id="@+id/loan_expected_no_strip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="62471"
+                android:textColor="@color/loan_expected_annual_rate_no_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="条评价"
+                android:textColor="@color/loan_expected_annual_rate_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="共发标"
+                android:textColor="@color/loan_expected_annual_rate_color" />
+
+            <TextView
+                android:id="@+id/loan_expected_no_stage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1868"
+                android:textColor="@color/loan_expected_annual_rate_no_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="期，已还款"
+                android:textColor="@color/loan_expected_annual_rate_color" />
+
+            <TextView
+                android:id="@+id/loan_expected_no_element"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="34948.04万"
+                android:textColor="@color/loan_expected_annual_rate_no_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="元"
+                android:textColor="@color/loan_expected_annual_rate_color" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
