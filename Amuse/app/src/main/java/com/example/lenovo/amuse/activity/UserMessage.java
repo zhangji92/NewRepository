@@ -84,6 +84,8 @@ public class UserMessage extends BaseActivity implements View.OnClickListener {
                         httpTools.postLogin(mHandler, user, pad, null, 2);
                         Toast.makeText(UserMessage.this, "信息保存成功", Toast.LENGTH_LONG).show();
                     }
+                }else {
+                    Toast.makeText(UserMessage.this, "信息保存失败", Toast.LENGTH_LONG).show();
                 }
             } else if (msg.what == BaseUri.PIC_CODE) {
                 VerificationCode verificationCode = parserMode(msg.obj);

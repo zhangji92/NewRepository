@@ -36,10 +36,17 @@ public class BaseUri {
 
     //场所_获取场所数据
     public final static String PLACE=BASE+"/service/index.php?model=city&action=placelist";
+    //获取场所_获取场详细信息
+    public final static String SHOP_DETAILS=BASE+"/service/index.php?model=home&action=shopinfobyid";
     //获取拼桌列表接口
     public final static String TABLE_LIST=BASE+"/service/index.php?model=city&action=spelltableinfolist";
+    //加入拼桌群聊接口
+    public final static String ADD_TABLE_CHAT=BASE+"/service/index.php?model=city&action=addspelltablebyid";
+
     //添加拼桌接口
     public final static String TABLE_LIST_ADD=BASE+"/service/index.php?model=city&action=spelltableadd";
+    //(达人馆)获取达人馆列表数据
+    public final static String UP_TO_HALL=BASE+"/service/index.php?model=city&action=talentlist_arr";
 
 
     //编辑个人信息
@@ -52,8 +59,9 @@ public class BaseUri {
     public final static String WINE_AGENT=BASE+"/service/index.php?model=city&action=agentinfobyid";
     //酒水代理商家信息及酒水列表接口
     public final static String WINE_DETAILS=BASE+"/service/index.php?model=city&action=agentshopinfobyid";
-    //获取商家详细信息
-    public final static String SHOP_DETAILS=BASE+"/service/index.php?model=home&action=shopinfobyid";
+    //获取融云token接口
+    public final static String RONG_YUN_TOKEN=BASE+"/service/index.php?model=rongyun&action=getToken";
+
 
     //code标识符
     public final static int FIRSTCODE=1;
@@ -103,6 +111,12 @@ public class BaseUri {
     public final static int TABLE_ADD_CODE=23;
     //Activity数据返回Code
     public final static int ACTIVITY_RETURN=24;
+    //达人馆
+    public final static int UP_TO_HALL_CODE=25;
+    //获取融云token
+    public final static int RONG_YUN_CODE=26;
+    //加入群聊成功码
+    public final static int RONG_YUN_CHAT_CODE=27;
 
 
 

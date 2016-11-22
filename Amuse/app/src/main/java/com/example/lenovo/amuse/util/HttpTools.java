@@ -75,7 +75,8 @@ public class HttpTools {
         } else if (flags == 3) {
             //获取验证码
             url = BaseUri.REGISTER_CODE + "&mobile=" + mobile;
-        } else if (flags == 4) {//快拍列表
+        } else if (flags == 4) {
+            //快拍列表
             url = BaseUri.SNAPSHORT + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize;
         }
         finalHttp.get(url, new AjaxCallBack<String>() {
@@ -231,6 +232,7 @@ public class HttpTools {
                 message.obj = JsonParserTools.parserMode(s, 4);
                 message.what = BaseUri.MESSAGE_CODE;
                 mHandler.sendMessage(message);
+                Log.i("getFirstDate", "----BaseUri.PLACE-------: " + s);
             }
 
             @Override
@@ -336,7 +338,7 @@ public class HttpTools {
                 if (flags == 1) {
                     message.obj = JsonParserTools.parserMode(s,14);
                     message.what = BaseUri.PLACE_CODE;
-                    Log.i("getFirstDate", "----BaseUri.PLACE-------: " + s);
+
                 } else if (flags == 2) {
                     message.what = BaseUri.WINE_AGENT_CODE;
                     message.obj = JsonParserTools.parserMode(s, 9);

@@ -150,6 +150,8 @@ public class TableListMode {
             this.away = away;
         }
 
+
+
         public String getAddtime() {
             return addtime;
         }

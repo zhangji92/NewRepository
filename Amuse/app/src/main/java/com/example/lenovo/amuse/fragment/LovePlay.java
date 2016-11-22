@@ -21,6 +21,7 @@ import com.example.lenovo.amuse.activity.PlaceActivity;
 import com.example.lenovo.amuse.activity.PlaceDetails;
 import com.example.lenovo.amuse.activity.SnapShortActivity;
 import com.example.lenovo.amuse.activity.TableListActivity;
+import com.example.lenovo.amuse.activity.UpToHall;
 import com.example.lenovo.amuse.activity.WineActivity;
 import com.example.lenovo.amuse.adapter.LovePlayAdapter;
 import com.example.lenovo.amuse.mode.LovePlayMode;
@@ -48,7 +49,8 @@ public class LovePlay extends BaseFragment implements View.OnClickListener {
     LinearLayout linearLayout_place;
     //拼桌
     private LinearLayout linearLayout_share;
-
+    //达人馆
+    LinearLayout linearLayout_talent;
     //精度
     int lat = 1;
     //维度
@@ -130,8 +132,8 @@ public class LovePlay extends BaseFragment implements View.OnClickListener {
         linearLayout_share = (LinearLayout) view.findViewById(R.id.liner_share);
         linearLayout_share.setOnClickListener(this);
         //达人馆
-
-
+        linearLayout_talent= (LinearLayout) view.findViewById(R.id.liner_talent);
+        linearLayout_talent.setOnClickListener(this);
         //scroll+listView设置一起滚动
         RelativeLayout zhiding = (RelativeLayout) view.findViewById(R.id.scroll_relative);
         zhiding.setFocusable(true);
@@ -177,7 +179,6 @@ public class LovePlay extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), WineActivity.class));
                 break;
             case R.id.liner_share:
-
                 boolean flag = ((MyApplication) getActivity().getApplication()).isFlag();
                 if (!flag) {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -186,8 +187,11 @@ public class LovePlay extends BaseFragment implements View.OnClickListener {
                     //跳转到拼桌页面
                     startActivity(new Intent(getActivity(), TableListActivity.class));
                 }
-
+                break; case R.id.liner_talent:
+                //跳转到拼桌页面
+                startActivity(new Intent(getActivity(), UpToHall.class));
                 break;
+
         }
     }
 }

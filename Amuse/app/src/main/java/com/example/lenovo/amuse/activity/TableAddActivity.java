@@ -147,7 +147,6 @@ public class TableAddActivity extends BaseActivity implements View.OnClickListen
                 String name = editText_name.getText().toString();
                 String title = editText_title.getText().toString();
                 String uri = BaseUri.TABLE_LIST_ADD + "&token=" + token + "&bid=" + bid + "&shopid=" + shopId + "&lat=" + "1" + "&lng=" + "1" + "&name=" + name + "&title=" + title;
-
                 ServiceMessage<VerificationCode> serviceMessage = new ServiceMessage<VerificationCode>(uri, BaseUri.TABLE_ADD_CODE, new VerificationCode());
                 httpTools.getServiceMessage(mHandler, serviceMessage);
                 break;

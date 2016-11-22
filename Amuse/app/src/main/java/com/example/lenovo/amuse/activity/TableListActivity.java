@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.example.lenovo.amuse.MyApplication;
 import com.example.lenovo.amuse.R;
 import com.example.lenovo.amuse.adapter.TableListAdapter;
 import com.example.lenovo.amuse.mode.TableListMode;
+import com.example.lenovo.amuse.mode.VerificationCode;
 import com.example.lenovo.amuse.util.BaseUri;
 import com.example.lenovo.amuse.util.ServiceMessage;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -21,13 +23,16 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+
 
 /**
  * Created by 张继 on 2016/10/26.
  * 拼桌接口
  */
 
-public class TableListActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener2,View.OnClickListener {
+public class TableListActivity extends BaseActivity implements PullToRefreshBase.OnRefreshListener2, View.OnClickListener {
     //listVIew控件
     private PullToRefreshListView pullToRefreshListView;
     //标识符
@@ -40,20 +45,24 @@ public class TableListActivity extends BaseActivity implements PullToRefreshBase
     private List<TableListMode.ResultCodeBean> mList = new ArrayList<>();
     private TableListAdapter tableListAdapter;
     private TableListMode tableListMode;
-
+    private VerificationCode mVerificationCode;
+    String stid;
 
     private Handler mHandler = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case BaseUri.TABLE_LIST_CODE:
                     tableListMode = parseMode(msg.obj);
                     if (tableListMode != null) {
+                        //赋值
+                        ((MyApplication)getApplication()).setmTableListMode(tableListMode);
+
                         if (pageNumber == 0) {
-                        for (int i = 0; i < tableListMode.getResultCode().size(); i++) {
-                            mList.add(tableListMode.getResultCode().get(i));
-                        }
+                            for (int i = 0; i < tableListMode.getResultCode().size(); i++) {
+                                mList.add(tableListMode.getResultCode().get(i));
+                            }
                         } else {
                             if (tableListMode.getResultCode().get(7).getNickname().equals(mList.get(0).getNickname())) {
                                 for (int i = 0; i < tableListMode.getResultCode().size(); i++) {
@@ -68,12 +77,62 @@ public class TableListActivity extends BaseActivity implements PullToRefreshBase
                     //停止刷新
                     pullToRefreshListView.onRefreshComplete();
                     break;
+                case BaseUri.RONG_YUN_CODE:
+                    mVerificationCode = (VerificationCode) msg.obj;
+                    if (mVerificationCode != null) {
+                        if (mVerificationCode.getMessage().contains("成功")) {
+                            //链接融云
+                            RongIM.connect(mVerificationCode.getResultCode(), new RongIMClient.ConnectCallback() {
+                                @Override
+                                public void onTokenIncorrect() {
+                                }
+
+                                @Override
+                                public void onSuccess(String s) {
+                                    Log.i("getFirstDate", "----RongIM-------: " + s);
+                                    String uri = BaseUri.ADD_TABLE_CHAT + "&token=" + token + "&stid=" + stid;
+
+                                    ServiceMessage<VerificationCode> serviceMessage = new ServiceMessage<VerificationCode>(uri, BaseUri.RONG_YUN_CHAT_CODE, new VerificationCode());
+                                    httpTools.getServiceMessage(mHandler, serviceMessage);
+                                }
+
+                                @Override
+                                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                                }
+                            });
+                        }
+                    }
+
+                    break;
+                case BaseUri.RONG_YUN_CHAT_CODE:
+                    VerificationCode verificationCode = (VerificationCode) msg.obj;
+                    if (verificationCode != null) {
+                        if (verificationCode.getCode().contains("10000") || verificationCode.getCode().contains("20000")) {
+
+                            RongIM.getInstance().joinGroup(stid, "aaa", new RongIMClient.OperationCallback() {
+                                @Override
+                                public void onSuccess() {
+                                    Log.e("onSuccess: ", "--------------------加入群组");
+                                    if (RongIM.getInstance() != null) {
+                                        RongIM.getInstance().startGroupChat(TableListActivity.this, stid, "群聊");
+                                    }
+                                }
+                                @Override
+                                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                                }
+                            });
+                        }
+                    }
+                    break;
             }
         }
     };
 
     /**
      * 格式化数据
+     *
      * @param obj 数据类
      * @return 返回数据
      */
@@ -117,24 +176,48 @@ public class TableListActivity extends BaseActivity implements PullToRefreshBase
      */
     private void initView() {
         pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.table_list_listView);
-        ImageView imageView= (ImageView) findViewById(R.id.snap_details_release);
+        ImageView imageView = (ImageView) findViewById(R.id.snap_details_release);
         imageView.setOnClickListener(this);
 
-        ImageView imageView_return= (ImageView) findViewById(R.id.table_list_return);
+        ImageView imageView_return = (ImageView) findViewById(R.id.table_list_return);
         imageView_return.setOnClickListener(this);
 
         //刷新监听器
         pullToRefreshListView.setOnRefreshListener(this);
         //上拉下拉模式
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
+
+
         //适配器
         tableListAdapter = new TableListAdapter(mList, TableListActivity.this);
+        tableListAdapter.setmOnClickButton(new TableListAdapter.OnClickButton() {
+            @Override
+            public void onClick2(int position) {
+                Intent intent = new Intent(TableListActivity.this, PlaceDetails.class);
+                intent.putExtra("shopId", mList.get(position).getShopid());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onClick(int position) {
+                stid = tableListMode.getResultCode().get(position).getId();
+                Log.i("getFirstDate", "---- stid-------: " + stid);
+
+                String uri = BaseUri.RONG_YUN_TOKEN + "&token=" + token;
+                //获取融云token
+                ServiceMessage<VerificationCode> serviceMessage = new ServiceMessage<VerificationCode>(uri, BaseUri.RONG_YUN_CODE, new VerificationCode());
+                httpTools.getServiceMessage(mHandler, serviceMessage);
+
+            }
+        });
+
+
     }
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
         Toast.makeText(TableListActivity.this, "下拉刷新", Toast.LENGTH_LONG).show();
-        pageNumber=0;
+        pageNumber = 0;
         String uri = BaseUri.TABLE_LIST + "&token=" + token + "&pageNumber=" + String.valueOf(pageNumber) + "&pageSize=" + "8" + "&lat=" + "1" + "&lng=" + "1";
         ServiceMessage<TableListMode> serviceMessage = new ServiceMessage<TableListMode>(uri, BaseUri.TABLE_LIST_CODE, new TableListMode());
         httpTools.getServiceMessage(mHandler, serviceMessage);
@@ -171,12 +254,12 @@ public class TableListActivity extends BaseActivity implements PullToRefreshBase
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.table_list_return:
                 finish();
                 break;
             case R.id.snap_details_release:
-                startActivity(new Intent(TableListActivity.this,TableAddActivity.class));
+                startActivity(new Intent(TableListActivity.this, TableAddActivity.class));
                 finish();
                 break;
         }

@@ -3,9 +3,12 @@ package com.example.lenovo.amuse;
 import android.app.Application;
 
 import com.example.lenovo.amuse.mode.SuccessMode;
+import com.example.lenovo.amuse.mode.TableListMode;
 import com.example.lenovo.amuse.util.MyFinalDB;
 
 import net.tsz.afinal.FinalDb;
+
+import io.rong.imkit.RongIM;
 
 /**
  * Created by lenovo on 2016/9/27.
@@ -13,6 +16,22 @@ import net.tsz.afinal.FinalDb;
  */
 
 public class MyApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        RongIM.init(this);
+    }
+
+    private TableListMode mTableListMode;
+
+    public TableListMode getmTableListMode() {
+        return mTableListMode;
+    }
+
+    public void setmTableListMode(TableListMode mTableListMode) {
+        this.mTableListMode = mTableListMode;
+    }
+
     //退出后的标识符
     private boolean flag = false;
     //账号密码

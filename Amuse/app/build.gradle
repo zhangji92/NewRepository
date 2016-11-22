@@ -31,7 +31,6 @@ dependencies {
     })
     compile project(path: ':afnial')
     compile files('libs/BaiduLBS_Android.jar')
-
     compile project(path: ':refreshlibrary')
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'io.github.openfeign:feign-gson:9.3.1'
@@ -39,4 +38,5 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     testCompile 'junit:junit:4.12'
+    compile project(':Rong_Cloud_Android_IMKit_SDK_v2_7_3_stable')
 }
