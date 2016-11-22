@@ -5,6 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="tab">#f7f7f7</color>
     <color name="tab_stroke">#eee</color>
+    <color name="calendar_text">#FFFFFF</color>
+    <color name="calendar_back">#ffe602</color>
+    <color name="calendar_moth">#41ff02</color>
 
 
 </resources>
